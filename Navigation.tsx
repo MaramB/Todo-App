@@ -10,20 +10,16 @@ const Navigation = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {/* {!localStorage.getItem('userId') ? */}
-                    <Stack.Screen
-                        name="Auth"
-                        component={AuthScreen}
-                        options={{ headerShown: false }}
-                    />
-                    {/* : */}
-                    <Stack.Screen
-                        name="TodoList"
-                        component={TodoScreen}
-                        options={{ title: 'Todo List' }}
-                    />
-                {/* } */}
-                {/* Add other screens and their configurations here */}
+                <Stack.Screen
+                    name="Auth"
+                    component={AuthScreen}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="TodoList"
+                    component={TodoScreen}
+                    options={{ title: 'Todo List' }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
