@@ -9,7 +9,13 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
     return res.sendStatus(401);
   }
 
-  jwt.verify(token, 'your-secret-key', (err: any, user: any) => {
+  const jwtSecret = process.env.JWT_SECRET;
+
+  if (!jwtSecret) {
+    return res.status(500).json({ error: 'JWT secret key not found' });
+  }
+
+  jwt.verify(token, jwtSecret, (err: any, user: any) => {
     if (err) {
       return res.sendStatus(403);
     }

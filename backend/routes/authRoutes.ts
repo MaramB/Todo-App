@@ -48,8 +48,14 @@ router.post('/login', async (req: Request, res: Response) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // Generate an access token
-    const accessToken = jwt.sign({ userId: user.id }, 'your-secret-key');
+        const jwtSecret = process.env.JWT_SECRET;
+
+        if (!jwtSecret) {
+            return res.status(500).json({ error: 'JWT secret key not found' });
+        }
+
+        // Generate an access token using JWT_SECRET from env vars
+        const accessToken = jwt.sign({ userId: user.id }, jwtSecret);
 
         res.json({ message: 'Login successful', user, accessToken });
     } catch (error) {
